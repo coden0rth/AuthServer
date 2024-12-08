@@ -20,7 +20,16 @@ namespace AuthServer
                     authServer.Stop();
                 };
 
-                while (true) { }
+                if (MySQLHelper.Init())
+                {
+                    authServer.InitListenThread();
+                    while (true) { }
+                }  else
+                {
+                    authServer.Stop();
+                }
+
+                
             }
             else
             {

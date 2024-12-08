@@ -21,9 +21,6 @@ namespace AuthServer
                 server.Start();
                 isRunning = true;
                 Logger.C($"Server started on { ipAddress}:{ port}", Logger.MessageType.Regular);
-
-                Thread listenThread = new Thread(ListenForClients);
-                listenThread.Start();
                 return true;
             }
             catch (SocketException ex)
@@ -37,9 +34,16 @@ namespace AuthServer
                 return false;
             }
         }
+        public void InitListenThread()
+        {
+            Thread listenThread = new Thread(ListenForClients);
+            listenThread.Start();
+        }
 
         private void ListenForClients()
         {
+            Logger.C($"Awaiting client connection...", Logger.MessageType.Regular);
+
             while (isRunning)
             {
                 try
@@ -87,7 +91,7 @@ namespace AuthServer
         {
             isRunning = false;
             server.Stop();
-            Logger.C("AuthServer Halted! Received Ctrl+C...", Logger.MessageType.Alert);
+            Logger.C("AuthServer Halted! Exiting...", Logger.MessageType.Alert);
             Thread.Sleep(2000);
             Environment.Exit(0);
         }
