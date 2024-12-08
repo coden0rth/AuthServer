@@ -98,7 +98,8 @@
     <Compile Include="Database\MySQLHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Servers\TCPServer.cs" />
+    <Compile Include="Servers\AuthServer.cs" />
+    <Compile Include="Util\Logger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
